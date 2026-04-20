@@ -1,0 +1,18 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+.idea
+generated/
+__pycache__/
+mlflow/
+.mlflow_tmp/
+*.json
+*.log
+*.pt
+mlflow/
+mlfruns
