@@ -1,4 +1,4 @@
-# Orthogonal Neural Operator Experiments
+# Debiased Neural Operators Experiments
 
 This README is the practical entry point for reproducing the results of the paper "Debiased neural operators for estimating functional".
 
