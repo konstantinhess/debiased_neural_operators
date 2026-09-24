@@ -1,0 +1,83 @@
+{
+  "name": "darcy_smooth_excess",
+  "experiment": "darcy",
+  "output_root": "outputs",
+  "repeats": 50,
+  "repeat_seed_offset": 63000,
+  "training_seed": 24105,
+  "batch_size": 8,
+  "truth_pool_size": 2000,
+  "conditions": [
+    0,
+    0.2,
+    0.4,
+    0.6,
+    0.8,
+    1
+  ],
+  "dataset": {
+    "dataset_name": "darcy",
+    "output_root": "outputs/_generated",
+    "seed": 14101,
+    "equation": {
+      "pde_class": "darcy_2d"
+    },
+    "observations": {
+      "num_observations": 24,
+      "noise_std": 0.01,
+      "epsilon_design": 0.001,
+      "saliency_scale": 7,
+      "design": "inverse_energy_mixture",
+      "design_strength": 1
+    },
+    "splits": {
+      "train": 256,
+      "val": 64,
+      "test": 256
+    },
+    "grid": {
+      "num_points_x": 17,
+      "num_points_y": 17
+    },
+    "input_function": {
+      "sampling_family": "piecewise_constant_transformed_gaussian_field",
+      "coarse_cells_x": 5,
+      "coarse_cells_y": 5,
+      "num_basis": 3,
+      "log_coeff_scale": 0.65,
+      "coeff_min": 0.2
+    }
+  },
+  "functional": "smooth_excess_above_threshold",
+  "functional_params": {
+    "c": 0.5,
+    "kappa_mode": "darcy_visible_unit_interval"
+  },
+  "methods": [
+    "plugin",
+    "dope"
+  ],
+  "debiasing_mode": "full",
+  "model": {
+    "model": {
+      "family": "fno2d",
+      "in_channels": 3,
+      "hidden_channels": 24,
+      "out_channels": 1,
+      "num_layers": 3,
+      "num_modes_x": 8,
+      "num_modes_y": 8
+    },
+    "solution_module": {
+      "learning_rate": 0.001,
+      "weight_decay": 0.00001,
+      "max_epochs": 20
+    },
+    "debiasing_module": {
+      "learning_rate": 0.001,
+      "weight_decay": 0.00001,
+      "max_epochs": 20,
+      "riesz_penalty_lambda": 0.001
+    }
+  }
+}

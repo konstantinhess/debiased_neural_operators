@@ -1,0 +1,65 @@
+{
+  "name": "pk_oracle_centered_smooth_tat",
+  "experiment": "pk_oracle_perturbation",
+  "output_root": "outputs",
+  "functional": "smooth_tat",
+  "functional_params": {
+    "kappa": 8,
+    "c_star": 0.5
+  },
+  "deltas": [
+    0,
+    0.025,
+    0.05,
+    0.1,
+    0.2,
+    0.3
+  ],
+  "repeats": 50,
+  "test_size": 256,
+  "truth_size": 20000,
+  "training_sample_size_reference": 256,
+  "seed": 20260804,
+  "dataset": {
+    "dataset_name": "pk_oracle_centered",
+    "output_root": "outputs/_generated",
+    "seed": 7010,
+    "equation": {
+      "pde_class": "pharmacokinetics_1d",
+      "time_horizon": 24
+    },
+    "grid": {
+      "num_points": 128
+    },
+    "population": {
+      "mean_log_clearance": 0,
+      "mean_log_volume": 1,
+      "std_log_clearance": 0.25,
+      "std_log_volume": 0.2,
+      "corr_log_clearance_volume": 0.4
+    },
+    "dosing": {
+      "pulse_family": "one_or_two_pulse",
+      "max_num_pulses": 2,
+      "amplitude_min": 0.5,
+      "amplitude_max": 2,
+      "duration_min": 1,
+      "duration_max": 4
+    },
+    "observations": {
+      "design": "fixed_window_mixture",
+      "num_observations": 24,
+      "noise_std": 0.002,
+      "design_strength": 0.5,
+      "design_strength_scale": 2.2222222222,
+      "design_strength_exponent": 0.5,
+      "peak_bandwidth": 1,
+      "design_center_time": 1
+    },
+    "splits": {
+      "train": 256,
+      "val": 64,
+      "test": 256
+    }
+  }
+}

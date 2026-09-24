@@ -1,0 +1,96 @@
+{
+  "experiment": "pk_ppi",
+  "output_root": "outputs",
+  "repeats": 50,
+  "repeat_seed_offset": 63000,
+  "training_seed": 5900,
+  "batch_size": 8,
+  "truth_pool_size": 2000,
+  "conditions": [
+    0.5
+  ],
+  "seed_by_rho": {
+    "0.5": 7010
+  },
+  "dataset": {
+    "dataset_name": "pk",
+    "output_root": "outputs/_generated",
+    "seed": 7010,
+    "equation": {
+      "pde_class": "pharmacokinetics_1d",
+      "time_horizon": 24
+    },
+    "grid": {
+      "num_points": 128
+    },
+    "population": {
+      "mean_log_clearance": 0,
+      "mean_log_volume": 1,
+      "std_log_clearance": 0.25,
+      "std_log_volume": 0.2,
+      "corr_log_clearance_volume": 0.4
+    },
+    "dosing": {
+      "pulse_family": "one_or_two_pulse",
+      "max_num_pulses": 2,
+      "amplitude_min": 0.5,
+      "amplitude_max": 2,
+      "duration_min": 1,
+      "duration_max": 4
+    },
+    "observations": {
+      "design": "fixed_window_mixture",
+      "num_observations": 24,
+      "noise_std": 0.002,
+      "design_strength": 0.5,
+      "design_strength_scale": 2.2222222222,
+      "design_strength_exponent": 0.5,
+      "peak_bandwidth": 1,
+      "design_center_time": 1
+    },
+    "splits": {
+      "train": 256,
+      "val": 64,
+      "test": 256
+    }
+  },
+  "methods": [
+    "plugin",
+    "dope"
+  ],
+  "unlabeled_counts": [
+    0,
+    64,
+    128,
+    256,
+    512,
+    1024,
+    2048,
+    4096
+  ],
+  "name": "pk_ppi_auc",
+  "functional": "auc",
+  "functional_params": {},
+  "debiasing_mode": "full",
+  "model": {
+    "model": {
+      "family": "fno1d",
+      "in_channels": 4,
+      "hidden_channels": 32,
+      "out_channels": 1,
+      "num_layers": 3,
+      "num_modes": 12
+    },
+    "solution_module": {
+      "learning_rate": 0.001,
+      "weight_decay": 0.00001,
+      "max_epochs": 20
+    },
+    "debiasing_module": {
+      "learning_rate": 0.001,
+      "weight_decay": 0.00001,
+      "max_epochs": 20,
+      "riesz_penalty_lambda": 0.001
+    }
+  }
+}

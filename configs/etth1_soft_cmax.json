@@ -1,0 +1,49 @@
+{
+  "experiment": "etth1",
+  "data_path": "data/ETTh1.csv",
+  "output_root": "outputs",
+  "rho_grid": [
+    0,
+    0.25,
+    0.5,
+    0.75,
+    1
+  ],
+  "repeats": 50,
+  "seed": 1729,
+  "batch_size": 64,
+  "splits": {
+    "train": 512,
+    "val": 64,
+    "test": 128
+  },
+  "history": 96,
+  "horizon": 24,
+  "stride": 24,
+  "k": 8,
+  "sampling_design": "early_block_without_replacement",
+  "model": {
+    "model": {
+      "family": "fno1d",
+      "in_channels": 29,
+      "hidden_channels": 16,
+      "out_channels": 1,
+      "num_layers": 2,
+      "num_modes": 8
+    },
+    "solution_module": {
+      "learning_rate": 0.001,
+      "weight_decay": 0.00001,
+      "max_epochs": 20
+    },
+    "debiasing_module": {
+      "learning_rate": 0.001,
+      "weight_decay": 0.00001,
+      "max_epochs": 20,
+      "riesz_penalty_lambda": 0.01
+    }
+  },
+  "name": "etth1_soft_cmax",
+  "functional": "soft_cmax",
+  "soft_cmax_temperature": 0.5
+}
